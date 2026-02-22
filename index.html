@@ -19,7 +19,7 @@ body{
     text-align:center;
 }
 
-/* Background Glow */
+/* Glow */
 body::before{
     content:"";
     position:absolute;
@@ -39,90 +39,60 @@ body::before{
     position:relative;
     top:50%;
     transform:translateY(-50%);
-    animation:fadeIn 2s ease-in-out;
 }
 
 h1{
-    font-size:55px;
+    font-size:50px;
     font-weight:900;
     background:linear-gradient(45deg,#ff006e,#ffbe0b);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    text-shadow:0 0 30px rgba(255,0,110,0.8);
     margin-bottom:30px;
 }
 
-/* Dialogue Box */
 .dialogue{
     width:80%;
     max-width:700px;
     margin:20px auto;
     padding:30px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(20px);
-    box-shadow:0 0 40px rgba(255,0,110,0.4);
-    font-size:24px;
-    animation:float 3s infinite ease-in-out;
+    border-radius:25px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 35px rgba(255,0,110,0.4);
+    font-size:22px;
+    line-height:1.6;
 }
 
 .hero{
     color:#00f5d4;
-    text-shadow:0 0 20px #00f5d4;
+    text-shadow:0 0 15px #00f5d4;
     font-weight:700;
 }
 
-/* Meow Effect */
 .meow{
-    font-size:45px;
+    font-size:40px;
     color:#ffbe0b;
-    display:inline-block;
+    margin-top:10px;
+    display:block;
 }
 
-/* Button */
 button{
-    margin-top:30px;
-    padding:15px 40px;
-    font-size:20px;
+    margin-top:25px;
+    padding:14px 35px;
+    font-size:18px;
     border:none;
     border-radius:50px;
     background:linear-gradient(45deg,#ff006e,#8338ec);
     color:white;
     cursor:pointer;
-    transition:0.4s;
-    box-shadow:0 0 25px #ff006e;
+    transition:0.3s;
+    box-shadow:0 0 20px #ff006e;
 }
 
 button:hover{
-    transform:scale(1.15) rotate(-2deg);
-    box-shadow:0 0 40px #ff006e;
+    transform:scale(1.1);
 }
 
-/* Floating Chemistry Emojis */
-.emoji{
-    position:absolute;
-    font-size:35px;
-    animation:floatUp 10s linear infinite;
-    opacity:0.8;
-}
-
-@keyframes floatUp{
-    from{transform:translateY(100vh) rotate(0deg);}
-    to{transform:translateY(-10vh) rotate(360deg);}
-}
-
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(60%);}
-    to{opacity:1; transform:translateY(-50%);}
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
-    100%{transform:translateY(0);}
-}
-
-/* Screen Shake */
 @keyframes shake{
     0%{transform:translate(0,0);}
     25%{transform:translate(5px,-5px);}
@@ -132,7 +102,7 @@ button:hover{
 }
 
 .shake{
-    animation:shake 0.4s;
+    animation:shake 0.5s;
 }
 </style>
 </head>
@@ -143,34 +113,29 @@ button:hover{
     <h1>🧪 CHEMISTRY KA PAPER 🔥</h1>
 
     <div class="dialogue">
-        😭 <b>🙈:</b><br><br>
-        Bhaiii kal  ka chemistry ka paper hai 😭<br>
-        kya hoga??
+        (Veer:)<br><br>
+        Bhai kal chemistry ka paper hai…<br>
+        Kal kya hoga?? 😭
     </div>
 
     <div class="dialogue hero">
-        😎 <b></b><br><br>
-        <span id="typing"></span><br><br>
+        😎:<br><br>
+        <span id="typing"></span>
         <span class="meow" id="meowText"></span>
     </div>
 
-    <button onclick="heroMoment()">my answer  😼🔥</button>
+    <button onclick="heroMoment()">😼 My answer 🔥</button>
 </div>
 
-<!-- Floating Emojis -->
-<div class="emoji" style="left:10%;">🧪</div>
-<div class="emoji" style="left:30%;animation-delay:2s;">🔥</div>
-<div class="emoji" style="left:50%;animation-delay:4s;">📚</div>
-<div class="emoji" style="left:70%;animation-delay:6s;">😼</div>
-<div class="emoji" style="left:85%;animation-delay:8s;">⚡</div>
-
-<audio id="sound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+<!-- AUDIO -->
+<audio id="sound" src="audio.mp3"></audio>
 
 <script>
 let text = "Maine kaha LADLAAAAAA.... 😎";
 let i = 0;
 
 function heroMoment(){
+
     let typing = document.getElementById("typing");
     let meow = document.getElementById("meowText");
     let sound = document.getElementById("sound");
@@ -179,18 +144,24 @@ function heroMoment(){
     meow.innerHTML="";
     i=0;
 
+    // play audio
+    sound.currentTime = 0;
+    sound.play();
+
     let interval = setInterval(()=>{
         if(i < text.length){
             typing.innerHTML += text.charAt(i);
             i++;
         } else {
             clearInterval(interval);
-            meow.innerHTML="Meowww 😼🐱🔥";
-            document.body.classList.add("shake");
-            sound.play();
-            setTimeout(()=>document.body.classList.remove("shake"),400);
+
+            setTimeout(()=>{
+                meow.innerHTML="Meowww 😼🐱🔥 Ghoop Ghoop";
+                document.body.classList.add("shake");
+                setTimeout(()=>document.body.classList.remove("shake"),500);
+            },800);
         }
-    },80);
+    },120);
 }
 </script>
 
